@@ -5,6 +5,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { ApodModule } from "./apod/apod.module"
 import { WeatherModule } from "./weather/weather.module"
 import { ManifestModule } from './manifest/manifest.module';
+import { PhotosModule } from './photos/photos.module';
 import config from "./config/Keys";
 
 @Module({
@@ -12,7 +13,8 @@ import config from "./config/Keys";
     MongooseModule.forRoot(config.mongoURI),
     ApodModule,
     WeatherModule,
-    ManifestModule
+    ManifestModule,
+    PhotosModule
   ],
   controllers: [AppController],
   providers: [AppService],

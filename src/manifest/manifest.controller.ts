@@ -6,7 +6,7 @@ export class ManifestController {
     constructor(private readonly manifestService: ManifestService) {} 
     
     @Get(":rover")
-    getSpirit(@Param("rover") rover) {
+    getSpirit(@Param("rover") rover): Promise<object> {
         return this.manifestService.getManifest(rover);
     }
 }
