@@ -13,7 +13,7 @@ export class WeatherService {
     ) {}
 
     async getWeather(): Promise<object>{
-        return await this.httpService.get("https://mars.nasa.gov/rs/api/?feed=weather&category=mars2020&feedtype=json")
+        return await this.httpService.get("https://mars.nasa.gov/rss/api/?feed=weather&category=mars2020&feedtype=json")
         .pipe(map((response: AxiosResponse) => {
             return response.data.sols
         }));

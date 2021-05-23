@@ -4,8 +4,6 @@ import { AppService } from './app.service';
 import { MongooseModule } from "@nestjs/mongoose";
 import { ApodModule } from "./apod/apod.module"
 import { WeatherModule } from "./weather/weather.module"
-import { ManifestService } from './manifest/manifest.service';
-import { ManifestController } from './manifest/manifest.controller';
 import { ManifestModule } from './manifest/manifest.module';
 import config from "./config/Keys";
 
@@ -16,7 +14,7 @@ import config from "./config/Keys";
     WeatherModule,
     ManifestModule
   ],
-  controllers: [AppController, ManifestController],
-  providers: [AppService, ManifestService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
