@@ -4,6 +4,7 @@ import { AxiosResponse } from "axios"
 import { InjectModel } from "@nestjs/mongoose"
 import { Apod } from "../interfaces/apod.interface"
 import { Model } from 'mongoose';
+import { Cron } from "@nestjs/schedule";
 
 @Injectable()
 export class ApodService {
@@ -11,6 +12,12 @@ export class ApodService {
         private readonly httpService: HttpService,
         @InjectModel("Apod") private readonly apodModel:Model<Apod>
     ) {}
+
+    @Cron("0 0 6 * * *")
+
+    handleCron() {
+        this.saveTodayApod();
+    }
     
     async getTodayApod(): Promise<object> {
         return await this.httpService.get("https://api.nasa.gov/planetary/apod?date&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV")

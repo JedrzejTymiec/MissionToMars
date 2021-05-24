@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { ManifestService } from "./manifest.service"
 
 @Controller('manifest')
@@ -8,5 +8,10 @@ export class ManifestController {
     @Get(":rover")
     getSpirit(@Param("rover") rover): Promise<object> {
         return this.manifestService.getManifest(rover);
+    }
+
+    @Post()
+    saveCuriosityYesterdayData(): Promise<void> {
+        return this.manifestService.saveYesterdayCuriosityData();
     }
 }

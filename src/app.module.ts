@@ -7,6 +7,7 @@ import { WeatherModule } from "./weather/weather.module"
 import { ManifestModule } from './manifest/manifest.module';
 import { PhotosModule } from './photos/photos.module';
 import config from "./config/Keys";
+import { ScheduleModule } from "@nestjs/schedule"
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import config from "./config/Keys";
     ApodModule,
     WeatherModule,
     ManifestModule,
-    PhotosModule
+    PhotosModule,
+    ScheduleModule.forRoot()
   ],
   controllers: [AppController],
   providers: [AppService],
