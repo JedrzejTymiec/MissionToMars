@@ -18,4 +18,10 @@ export class WeatherService {
             return response.data.sols
         }));
     }
+
+    async saveYesterdayWeather(): Promise<void> {
+        const data = (await this.httpService.get("https://mars.nasa.gov/rss/api/?feed=weather&category=mars2020&feedtype=json").toPromise()).data
+        const newData = new this.weatherModel(data.sols[6]);
+        await newData.save()
+    }
 }

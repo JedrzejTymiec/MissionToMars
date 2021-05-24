@@ -1,11 +1,15 @@
 import { Injectable, HttpService } from '@nestjs/common';
 import { map } from 'rxjs/operators';
 import { AxiosResponse } from "axios"
+import { InjectModel } from "@nestjs/mongoose"
+import { Apod } from "../interfaces/apod.interface"
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ApodService {
     constructor(
-        private httpService: HttpService
+        private readonly httpService: HttpService,
+        @InjectModel("Apod") private readonly apodModel:Model<Apod>
     ) {}
     
     async getTodayApod(): Promise<object> {
@@ -22,5 +26,10 @@ export class ApodService {
             }))
     }
 
-    async
+    async saveTodayApod(): Promise<void> {
+        const data = (await this.httpService.get("https://api.nasa.gov/planetary/apod?date&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV")
+        .toPromise()).data
+        const newData = new this.apodModel(data)
+        await newData.save();
+    }
 }

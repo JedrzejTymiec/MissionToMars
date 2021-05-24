@@ -1,8 +1,14 @@
 import * as mongoose from "mongoose"
 
 export const WeatherSchema = new mongoose.Schema({
-    terrestrial_date: String,
-    sol: String,
+    terrestrial_date: {
+        type: String,
+        unique: true
+    },
+    sol: {
+        type: String,
+        unique: true
+    },
     ls: String,
     season: String,
     min_temp: Number,
