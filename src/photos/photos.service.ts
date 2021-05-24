@@ -23,7 +23,7 @@ export class PhotosService {
         this.savePhotosByDate("Curiosity", searchDate);
     }
 
-    async getPhotosBySol(rover: string, date: string, camera?: string): Promise<object> {
+    async getPhotosBySol(rover: string, sol: string, camera?: string): Promise<object> {
         return await this.httpService.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/${ rover }/photos?sol=${ sol }${camera && "&camera=" + camera}&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV`)
         .pipe(map((response: AxiosResponse) => {
             return response.data
@@ -37,7 +37,7 @@ export class PhotosService {
         }))
     }
 
-    async savePhotosBySol(rover: string, date: string, camera?: string): Promise<void> {
+    async savePhotosBySol(rover: string, sol: string, camera?: string): Promise<void> {
         const data = (await this.httpService.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/${ rover }/photos?sol=${ sol }${camera && "&camera=" + camera}&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV`)
         .toPromise()).data;
         data.photos.forEach(async element => {
