@@ -1,0 +1,239 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+.btn {
+  background-color: antiquewhite;
+  padding: 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background-color: aqua;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+.app {
+  display: flex;
+  position: relative;
+  width: 100vw;
+  background-color: #e0e0e0;
+}
+
+.header {
+  min-height: 100vh;
+  background-color: #999;
+  align-items: center;
+  text-align: center;
+}
+
+.header h3 {
+  margin: 1rem 0;
+}
+
+.header .weather-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.header .weather-container .weather-panel {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #eccaca;
+  border-radius: 10px;
+  width: 150px;
+}
+
+.header .weather-container .weather-panel p {
+  font-size: 0.8rem;
+}
+
+.header .weather-container .weather-panel .date-container {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c9b3b3;
+}
+
+.header .weather-container .weather-panel .date-container p:first-child {
+  font-size: 0.9rem;
+}
+
+.header .weather-container .weather-panel .temp-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .weather-container .weather-panel .pressure-container {
+  text-align: center;
+}
+
+.header .weather-container .weather-panel .sun-time {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header .nav-container {
+  margin-right: 1rem;
+  max-width: 180px;
+  margin: auto;
+  border-bottom: 1px solid #fff;
+}
+
+.body-container {
+  padding: 1rem 2rem;
+  width: 100%;
+}
+
+.body-container h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.body-container .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #ececec;
+  padding: 1rem;
+}
+
+.body-container .container .title {
+  margin-bottom: 1rem;
+}
+
+.body-container .container .title h3:first-child {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.body-container .container .apod-body {
+  margin: auto;
+  display: flex;
+}
+
+.body-container .container .apod-body .img-container {
+  margin: auto;
+}
+
+.body-container .container .apod-body img {
+  width: 100%;
+}
+
+.body-container .container .apod-body p {
+  max-width: 50%;
+  line-height: 1.5rem;
+  padding: 0 1rem;
+}
+
+.body-container .container .apod-body p span {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.body-container .rovers-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.body-container .rovers-container .rover {
+  background-color: #fff;
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.body-container .rovers-container .rover .desc-group {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+}
+
+.body-container .rovers-container .rover ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.body-container .rovers-container .rover ul span {
+  font-weight: 700;
+}
+
+.body-container .rovers-container .rover .btn {
+  margin-top: 1rem;
+}
+
+.body-container .gallery-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.body-container .gallery-nav h1 {
+  font-size: 2rem;
+}
+
+.body-container .gallery-nav .search-container {
+  display: flex;
+  align-items: center;
+}
+
+.body-container .gallery-nav .search-container .checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.body-container .gallery-nav .search-container .checkbox-container p {
+  margin-right: 1rem;
+}
+
+.body-container .gallery-nav .search-container .checkbox-container input {
+  display: block;
+}
+
+.body-container .gallery-nav .search-container .checkbox-container .form-group {
+  display: flex;
+  align-items: center;
+}
+
+.body-container .gallery-nav .search-container .search {
+  padding: 1rem;
+  font-size: 1rem;
+  height: 50%;
+}
+
+.body-container .photo-list {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.body-container .photo-list span {
+  font-weight: 400;
+}
+
+.body-container .photo-list .img-container {
+  width: 200px;
+  cursor: pointer;
+  margin: 0.3rem;
+}
+
+.body-container .photo-list .img-container img {
+  width: 100%;
+}
+
+.body-container .photo {
+  padding: 1rem;
+  margin: auto;
+}
+/*# sourceMappingURL=style.css.map */
