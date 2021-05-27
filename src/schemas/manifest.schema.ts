@@ -1,10 +1,7 @@
 import * as mongoose from "mongoose"
 
 export const ManifestSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        unique: true
-    },
+    name: String,
     landing_date: String,
     launch_date: String,
     status: String,
@@ -13,7 +10,10 @@ export const ManifestSchema = new mongoose.Schema({
     total_photos: Number,
     photos: [
         {
-            sol: Number,
+            sol: {
+                type: Number,
+                unique: false
+            },
             earth_date: String,
             total_photos: Number,
             cameras: [String]

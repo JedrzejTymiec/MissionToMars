@@ -11,7 +11,7 @@ export class WeatherService {
     constructor(
         @InjectModel("Weather") private readonly weatherModel: Model<Weather>,
         private httpService: HttpService
-    ) {}
+    ) { }
 
     @Cron("0 0 6 * * *")
 
@@ -19,11 +19,10 @@ export class WeatherService {
         this.saveYesterdayWeather()
     }
 
-    async getWeather(): Promise<object>{
-        return await this.httpService.get("https://mars.nasa.gov/rss/api/?feed=weather&category=mars2020&feedtype=json")
-        .pipe(map((response: AxiosResponse) => {
-            return response.data.sols
-        }));
+    async getWeather(): Promise<object> {
+        const data = (await this.httpService.get("https://mars.nasa.gov/rss/api/?feed=weather&category=mars2020&feedtype=json").toPromise()).data
+        const reversedData = data.sols.reverse();
+        return reversedData;
     }
 
     async saveYesterdayWeather(): Promise<void> {
