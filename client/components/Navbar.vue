@@ -1,10 +1,8 @@
 <template>
   <div class="header">
     <div class="nav-container">
-      <nuxt-link class="btn" to="/">Mars gallery</nuxt-link>
-      <nuxt-link class="btn" to="/apod"
-        >Astrological Picture of the day</nuxt-link
-      >
+      <nuxt-link class="btn" to="/rovers">Mars gallery</nuxt-link>
+      <nuxt-link class="btn" to="/">Astrological Picture of the day</nuxt-link>
     </div>
     <Weather />
   </div>

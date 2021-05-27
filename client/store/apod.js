@@ -1,7 +1,27 @@
 import axios from 'axios'
 
-export const state = () => ({});
+export const state = () => ({
+    apod: {},
+    loading: true
+});
 
-export const actions = {};
+export const actions = {
+    async getApodByDate({commit}, date) {
+        const res = await axios.get(`/api/apod/${date}`)
 
-export const mutations = {};
+        commit("setApod", res.data)
+    },
+
+    async getLastApod({commit}) {
+        const res = await axios.get(`/api/apod/`)
+
+        commit("setApod", res.data)
+    }
+};
+
+export const mutations = {
+    setApod: (state, apod) => {
+        state.apod = apod
+        state.loading = false
+    }
+};

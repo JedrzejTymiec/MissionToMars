@@ -2,7 +2,8 @@ import axios from "axios";
 
 export const state = () => ({
     manifests: [],
-    loading: true
+    loading: true,
+    called: false
 })
 
 export const actions = {
@@ -18,6 +19,10 @@ export const actions = {
 }
 
 export const mutations = {
+    manifestCalled: (state) => {
+        state.called = true
+    },
+
     setManifests: (state, manifests) => {
         state.manifests = manifests
         state.loading = false

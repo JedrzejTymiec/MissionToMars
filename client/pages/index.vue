@@ -1,53 +1,96 @@
 <template>
   <div class="body">
-    <h1>Mars rovers photo gallery</h1>
-    <div class="rovers-container">
-      <Spinner v-if="loading" />
-      <RoverDescription
-        v-else
-        :key="rover.name"
-        v-for="rover in manifests"
-        :rover="rover"
-      />
+    <h1>Astrological Picture of the Day</h1>
+    <Spinner v-if="loading" />
+    <div v-else class="container">
+      <div class="title">
+        <h3>{{ apod.date }}</h3>
+        <h3>{{ apod.title }}</h3>
+      </div>
+      <div class="apod-body">
+        <div class="img-container">
+          <img :src="apod.hdurl" :alt="apod.title" />
+        </div>
+        <p><span>Explanation:</span> {{ apod.explanation }}</p>
+      </div>
+      <!-- Prev Button -->
     </div>
   </div>
 </template>
 
 <script>
-import RoverDescription from "../components/RoverDescription"
 import { mapActions } from "vuex"
 import Spinner from "../components/Spinner"
 
 export default {
+  name: "APOD",
   components: {
-    RoverDescription,
     Spinner,
   },
 
   computed: {
-    loading() {
-      return this.$store.state.manifest.loading
+    apod() {
+      return this.$store.state.apod.apod
     },
-    manifests() {
-      return this.$store.state.manifest.manifests
+    loading() {
+      return this.$store.state.apod.loading
     },
   },
 
   methods: {
     ...mapActions({
+      getLastApod: "apod/getLastApod",
       getManifests: "manifest/getManifests",
     }),
   },
 
   created() {
+    this.getLastApod()
     this.getManifests()
+    this.$store.commit("manifest/manifestCalled")
   },
 }
 </script>
 
-<style>
-.rovers-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #ececec;
+  padding: 1rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.title h3:first-child {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.apod-body {
+  margin: auto;
+  display: flex;
+}
+
+.img-container {
+  margin: auto;
+}
+
+.img-container img {
+  width: 100%;
+}
+
+p {
+  max-width: 50%;
+  line-height: 1.5rem;
+  padding: 0 1rem;
+}
+
+span {
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 </style>

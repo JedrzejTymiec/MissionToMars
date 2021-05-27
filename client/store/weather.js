@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 export const state = () => ({
-    weathers: []
+    weathers: [],
+    loading: true
 });
 
 export const actions = {
@@ -15,5 +16,6 @@ export const actions = {
 export const mutations = {
     setWeather: (state, weathers) => {
         state.weathers = weathers
+        state.loading = false
     }
 };

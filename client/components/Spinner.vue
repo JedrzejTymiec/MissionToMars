@@ -10,7 +10,7 @@ export default {
 
 <style scoped>
 img {
-  width: 200px;
+  width: 100px;
   margin: auto;
   display: block;
 }
