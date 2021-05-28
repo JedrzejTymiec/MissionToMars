@@ -14,13 +14,14 @@
 <script>
 import { mapActions } from "vuex"
 import WeatherPanel from "./WeatherPanel"
-import Spinner from "../components/Spinner"
+import Spinner from "../Spinner"
 
 export default {
   name: "Weather",
 
   components: {
     WeatherPanel,
+    Spinner,
   },
 
   computed: {

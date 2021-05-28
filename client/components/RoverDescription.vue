@@ -23,7 +23,7 @@
         <p>{{ rover.status }}</p>
       </div>
       <div class="desc-group">
-        <p>total photos:</p>
+        <p>Total photos:</p>
         <p>{{ rover.total_photos }}</p>
       </div>
       <ul v-if="rover.name === 'Curiosity'">
@@ -48,7 +48,7 @@
         </li>
       </ul>
     </div>
-    <nuxt-link :to="'/' + rover.name.toLowerCase()" class="btn"
+    <nuxt-link :to="'/gallery/' + rover.name.toLowerCase()" class="btn"
       >Show photos</nuxt-link
     >
   </div>

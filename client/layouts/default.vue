@@ -6,11 +6,22 @@
 </template>
 
 <script>
-import Navbar from "../components/Navbar"
+import Navbar from "../components/sidebar/Navbar"
+import { mapActions } from "vuex"
 
 export default {
   components: {
     Navbar,
+  },
+
+  methods: {
+    ...mapActions({
+      getManifests: "manifest/getManifests",
+    }),
+  },
+
+  created() {
+    this.getManifests()
   },
 }
 </script>

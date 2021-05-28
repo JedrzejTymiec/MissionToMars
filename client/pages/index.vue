@@ -9,11 +9,23 @@
       </div>
       <div class="apod-body">
         <div class="img-container">
-          <img :src="apod.hdurl" :alt="apod.title" />
+          <img
+            v-if="apod.media_type === 'image'"
+            :src="apod.url"
+            :alt="apod.title"
+          />
+          <div v-else>
+            <iframe width="500" height="350" :src="apod.url"></iframe>
+          </div>
         </div>
         <p><span>Explanation:</span> {{ apod.explanation }}</p>
       </div>
-      <!-- Prev Button -->
+      <div class="buttons-container">
+        <button class="btn" @click="showPreviousApod">Show previous</button>
+        <button v-if="this.nextButton" class="btn" @click="showNextApod">
+          Show next
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -37,16 +49,49 @@ export default {
     },
   },
 
+  data() {
+    return {
+      nextButton: false,
+      date: "",
+    }
+  },
+
   methods: {
     ...mapActions({
       getLastApod: "apod/getLastApod",
       getManifests: "manifest/getManifests",
+      getApodByDate: "apod/getApodByDate",
     }),
+    async getTodayApod() {
+      await this.getLastApod()
+      this.date = this.apod.date
+    },
+    showPreviousApod() {
+      let date = new Date(this.apod.date)
+      date.setDate(date.getDate() - 1)
+      date = date.toISOString().slice(0, 10)
+      this.getApodByDate(date)
+      this.$store.commit("apod/apodUpdating")
+      !this.nextButton && (this.nextButton = true)
+    },
+    todayApodDate() {
+      this.date = this.apod.date
+    },
+    showNextApod() {
+      let date = new Date(this.apod.date)
+      date.setDate(date.getDate() + 1)
+      date = date.toISOString().slice(0, 10)
+      this.getApodByDate(date)
+      this.$store.commit("apod/apodUpdating")
+      let dateToCompare = new Date(this.date)
+      dateToCompare.setDate(dateToCompare.getDate() - 1)
+      dateToCompare = dateToCompare.toISOString().slice(0, 10)
+      this.apod.date === dateToCompare && (this.nextButton = false)
+    },
   },
 
   created() {
-    this.getLastApod()
-    this.getManifests()
+    this.getTodayApod()
     this.$store.commit("manifest/manifestCalled")
   },
 }
@@ -79,7 +124,8 @@ export default {
   margin: auto;
 }
 
-.img-container img {
+.img-container img,
+.img-container div {
   width: 100%;
 }
 
@@ -92,5 +138,10 @@ p {
 span {
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
