@@ -6,12 +6,4 @@ export interface Manifest {
     max_sol: number;
     max_date: string;
     total_photos: number;
-    photos: [
-        {
-            sol: number,
-            earth_date: string,
-            total_photos: number,
-            cameras: [string]
-        }
-    ];
 }
