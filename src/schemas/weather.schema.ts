@@ -9,7 +9,6 @@ export const WeatherSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    ls: String,
     season: String,
     min_temp: Number,
     max_temp: Number,
