@@ -1,31 +1,43 @@
-import { 
-    Controller,   
-    Param, 
-    Get, 
-    Post } from "@nestjs/common";
+import {
+    Controller,
+    Param,
+    Get,
+    Post
+} from "@nestjs/common";
 import { ApodService } from "./apod.service";
+import { Apod } from "../interfaces/apod.interface"
 
 @Controller("apod")
 export class ApodController {
-    constructor(private readonly apodService: ApodService) {}
-
-    @Get()
-    findTodays(): Promise<object> {
-        return this.apodService.getTodayApod();
-    }
-
-    @Get(":date")
-    findByDate(@Param("date") date): Promise<object> {
-        return this.apodService.getApodByDate(date);
-    }
-
+    constructor(private readonly apodService: ApodService) { }
+    // //todays apod from nasa
+    //     @Get()
+    //     findTodays(): Promise<object> {
+    //         return this.apodService.getTodayApod();
+    //     }
+    // //apod by date from nasa
+    //     @Get(":date")
+    //     findByDate(@Param("date") date): Promise<object> {
+    //         return this.apodService.getApodByDate(date);
+    //     }
+    //save todaty apod, cron funtion
     @Post()
     saveTodays(): Promise<void> {
         return this.apodService.saveTodayApod();
     }
-
+    //db population function
     @Post(":date")
-    async saveByDate(@Param("date") date): Promise<string> {
+    saveByDate(@Param("date") date): Promise<string> {
         return this.apodService.saveApodByDate(date)
+    }
+
+    @Get()
+    getLastestApod(): Promise<Apod[]> {
+        return this.apodService.lastestApod();
+    }
+
+    @Get("/:date")
+    getApodByDate(@Param("date") date): Promise<Apod[]> {
+        return this.apodService.apodByDate(date);
     }
 }

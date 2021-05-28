@@ -10,15 +10,16 @@ import { Cron } from "@nestjs/schedule";
 export class ApodService {
     constructor(
         private readonly httpService: HttpService,
-        @InjectModel("Apod") private readonly apodModel:Model<Apod>
-    ) {}
+        @InjectModel("Apod") private readonly apodModel: Model<Apod>
+    ) { }
 
     @Cron("0 0 6 * * *")
 
     handleCron() {
         this.saveTodayApod();
     }
-    
+
+    //Today apod from nasa
     async getTodayApod(): Promise<object> {
         return await this.httpService.get("https://api.nasa.gov/planetary/apod?date&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV")
             .pipe(map((response: AxiosResponse) => {
@@ -26,6 +27,7 @@ export class ApodService {
             }))
     }
 
+    //apod by date from nasa
     async getApodByDate(date): Promise<object> {
         return await this.httpService.get(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV`)
             .pipe(map((response: AxiosResponse) => {
@@ -33,16 +35,18 @@ export class ApodService {
             }))
     }
 
+    //everyday update func
     async saveTodayApod(): Promise<void> {
         const data = (await this.httpService.get("https://api.nasa.gov/planetary/apod?date&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV")
-        .toPromise()).data
+            .toPromise()).data
         const newData = new this.apodModel(data)
         await newData.save();
     }
 
+    //db population 
     async saveApodByDate(date): Promise<string> {
         const data = (await this.httpService.get(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV`)
-        .toPromise()).data;
+            .toPromise()).data;
         const dataObj = {
             copyright: data.copyright,
             date: data.date,
@@ -54,5 +58,14 @@ export class ApodService {
         const newData = new this.apodModel(dataObj);
         await newData.save();
         return `Apod ${date} saved`
+    }
+
+
+    async lastestApod(): Promise<Apod[]> {
+        return this.apodModel.find().sort({ date: -1 }).limit(1)
+    }
+
+    async apodByDate(date): Promise<Apod[]> {
+        return this.apodModel.find({ date: date })
     }
 }
