@@ -1,21 +1,24 @@
 <template>
   <div class="title-container">
-    <div class="title">
-      <h1>
-        {{ rover }}
-      </h1>
-      <h2>
-        Sol - {{ currentSol }} <span>{{ currentDate }}</span>
-      </h2>
+    <div>
+      <div class="title">
+        <h1>
+          {{ rover }}
+        </h1>
+        <h2>
+          Sol - {{ currentSol }} <span>{{ currentDate }}</span>
+        </h2>
+      </div>
+      <SearchBar
+        :sol="currentSol"
+        :rover="rover"
+        :nextSolNr="this.nextSol"
+        :prevSolNr="this.prevSol"
+        :maxSol="maxSolCurio"
+        :setSol="setSol"
+        :cameras="manifest.cameras"
+      />
     </div>
-    <SearchBar
-      :sol="currentSol"
-      :rover="rover"
-      :nextSolNr="this.nextSol"
-      :prevSolNr="this.prevSol"
-      :maxSol="maxSolCurio"
-      :setSol="setSol"
-    />
   </div>
 </template>
 
@@ -36,16 +39,25 @@ export default {
     maxSolCurio: Number,
     setSol: Function,
     setDate: Function,
+    manifest: Object,
+  },
+  created() {
+    console.log(this.manifest)
   },
 }
 </script>
 
 <style scoped>
+.photos-by-cam {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 span {
   font-weight: 400;
 }
 
-.title-container {
+.title-container > div {
   display: flex;
   justify-content: space-between;
 }

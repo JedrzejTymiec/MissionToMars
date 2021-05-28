@@ -10,6 +10,7 @@
         :prevSol="prevSol"
         :maxSolCurio="this.manifest && this.manifest.max_sol"
         :setSol="setSol"
+        :manifest="this.currentSolObj"
       />
       <Spinner v-if="loading" />
       <PhotosList :photos="this.photos" />
@@ -32,6 +33,7 @@ export default {
         this.$route.params.rover.charAt(0).toUpperCase() +
         this.$route.params.rover.slice(1),
       currentSol: null,
+      currentSolObj: {},
       currentDate: "",
     }
   },
@@ -60,6 +62,7 @@ export default {
         (element) => element.sol === sol
       )
       this.currentDate = element.earth_date
+      this.currentSolObj = element
     },
     nextSol() {
       this.currentSol++

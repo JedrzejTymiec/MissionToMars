@@ -11,7 +11,7 @@
         :setSol="setSol"
         :setDate="setDate"
       />
-      <PicFilter :sol="sol" :rover="rover" />
+      <PicFilter :sol="sol" :rover="rover" :cameras="cameras" />
     </div>
   </div>
 </template>
@@ -30,6 +30,7 @@ export default {
     prevSolNr: Function,
     maxSol: Number,
     setSol: Function,
+    cameras: Array,
   },
   data() {
     return {

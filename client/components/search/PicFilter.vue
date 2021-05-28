@@ -1,38 +1,48 @@
 <template>
-  <form class="form" @sumit="onSubmit($event)">
+  <div>
     <select v-model="camera">
-      <option value="FHAZ">Front Hazard Avoidance Camera</option>
-      <option value="RHAZ">Rear Hazard Avoidance Camera</option>
-      <option value="NAVCAM">Navigation Camera</option>
-      <option v-if="rover === 'Curiosity'" value="MAST">Mast Camera</option>
-      <option v-if="rover === 'Curiosity'" value="CHEMCAM">
+      <option v-if="cameras.find((cam) => cam === 'FHAZ')" value="FHAZ">
+        Front Hazard Avoidance Camera
+      </option>
+      <option v-if="cameras.find((cam) => cam === 'RHAZ')" value="RHAZ">
+        Rear Hazard Avoidance Camera
+      </option>
+      <option v-if="cameras.find((cam) => cam === 'NAVCAM')" value="NAVCAM">
+        Navigation Camera
+      </option>
+      <option v-if="cameras.find((cam) => cam === 'MAST')" value="MAST">
+        Mast Camera
+      </option>
+      <option v-if="cameras.find((cam) => cam === 'CHEMCAM')" value="CHEMCAM">
         Chemistry and Camera Complex
       </option>
-      <option v-if="rover === 'Curiosity'" value="MAHLI">
+      <option v-if="cameras.find((cam) => cam === 'MAHLI')" value="MAHLI">
         Mars Hand Lens Imager
       </option>
-      <option v-if="rover === 'Curiosity'" value="MARDI">
+      <option v-if="cameras.find((cam) => cam === 'MARDI')" value="MARDI">
         Mars Descent Imager
       </option>
-      <option v-if="rover !== 'Curiosity'" value="PANCAM">
+      <option v-if="cameras.find((cam) => cam === 'PANCAM')" value="PANCAM">
         Panoramic Camera
       </option>
-      <option v-if="rover !== 'Curiosity'" value="MINITES">
+      <option v-if="cameras.find((cam) => cam === 'MINITES')" value="MINITES">
         Miniature Thermal Emission Spectrometer (Mini-TES)
       </option>
     </select>
-    <button class="btn" type="submit">Filter!</button>
-  </form>
+    <button class="btn" type="submit" @click="onClick">Filter!</button>
+  </div>
 </template>
 
 <script>
 import { mapActions } from "vuex"
+import axios from "axios"
 
 export default {
   name: "PicFilter",
   props: {
     rover: String,
     sol: Number,
+    cameras: Array,
   },
   data() {
     return {
@@ -40,22 +50,29 @@ export default {
     }
   },
   methods: {
-    onSubmit(e) {
-      e.preventDefault()
+    async onClick() {
       switch (this.rover) {
         case "Spirit":
-          console.log("switch filter")
-          this.spiritFilter({ sol: this.sol, rover: this.rover })
+          let res = await axios.get(
+            `/api/photos/sol/spirit/${this.sol}/${this.camera}`
+          )
+          this.$store.commit("pictures/setPictures", res.data.photos)
           break
         case "Opportunity":
-          this.getOpportunityBySol(parseInt(this.inputNr))
+          res = await axios.get(
+            `/api/photos/sol/0pportunity/${this.sol}/${this.camera}`
+          )
+          this.$store.commit("pictures/setPictures", res.data.photos)
           break
         case "Curiosity":
-          this.getCuriosityBySol(parseInt(this.inputNr))
+          res = await axios.get(
+            `/api/photos/sol/curiosity/${this.sol}/${this.camera}`
+          )
+          this.$store.commit("pictures/setPictures", res.data.photos)
           break
       }
-      this.$store.commit("pictures/removePictures")
-      this.setSol(parseInt(this.inputNr))
+      // this.$store.commit("pictures/removePictures")
+      // this.setSol(parseInt(this.inputNr))
 
       this.inputNr = null
     },

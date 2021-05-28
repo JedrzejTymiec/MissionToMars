@@ -30,7 +30,9 @@ export const actions = {
 
     async spiritFilter({ commit }, { sol, cam }) {
         const res = await axios.get(`/api/photos/sol/spirit/${sol}/${cam}`)
+        console.log(`/api/photos/sol/spirit/${sol}/${cam}`)
         console.log("action")
+        console.log(res)
         commit("setPictures", res.data.photos)
         commit("setSol", sol)
     },
