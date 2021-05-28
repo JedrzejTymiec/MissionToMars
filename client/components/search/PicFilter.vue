@@ -38,7 +38,7 @@
         Mars Hand Lens Imager
       </option>
       <option
-        v-if="camera ? cameras.find((cam) => cam === 'MARDI') : true"
+        v-if="cameras ? cameras.find((cam) => cam === 'MARDI') : true"
         value="MARDI"
       >
         Mars Descent Imager
@@ -87,7 +87,7 @@ export default {
           break
         case "Opportunity":
           res = await axios.get(
-            `/api/photos/sol/0pportunity/${this.sol}/${this.camera}`
+            `/api/photos/sol/opportunity/${this.sol}/${this.camera}`
           )
           this.$store.commit("pictures/setPictures", res.data.photos)
           break

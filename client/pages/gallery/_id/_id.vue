@@ -55,19 +55,18 @@ export default {
     },
     nextPhoto(index) {
       if (this.photos.length > index + 1) {
-        this.photoToDisplay = this.photos[index + 1].img_src
+        this.currentPhoto = this.photos[index + 1]
         this.index = index + 1
       }
     },
     prevPhoto(index) {
       if (index > 0) {
-        this.photoToDisplay = this.photos[index - 1].img_src
+        this.currentPhoto = this.photos[index - 1]
         this.index = index - 1
       }
     },
   },
   created() {
-    console.log(this.$route.params)
     this.findPhotoById(this.$route.params.id)
   },
 }
@@ -97,5 +96,6 @@ img {
   position: absolute;
   top: 0;
   left: 250px;
+  width: 500px;
 }
 </style>

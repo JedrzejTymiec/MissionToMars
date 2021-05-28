@@ -41,9 +41,6 @@ export default {
     setDate: Function,
     manifest: Object,
   },
-  created() {
-    console.log(this.manifest)
-  },
 }
 </script>
 

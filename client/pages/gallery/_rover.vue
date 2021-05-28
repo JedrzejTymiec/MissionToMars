@@ -13,7 +13,7 @@
         :manifest="this.currentSolObj"
       />
       <Spinner v-if="loading" />
-      <PhotosList :photos="this.photos" />
+      <PhotosList :photos="this.photos" :loading="loading" />
     </div>
   </div>
 </template>
@@ -61,7 +61,9 @@ export default {
       const element = this.manifest.photos.find(
         (element) => element.sol === sol
       )
-      this.currentDate = element.earth_date
+      element
+        ? (this.currentDate = element.earth_date)
+        : (this.currentDate = "")
       this.currentSolObj = element
     },
     nextSol() {

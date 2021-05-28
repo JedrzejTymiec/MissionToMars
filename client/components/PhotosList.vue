@@ -1,13 +1,15 @@
 <template>
-  <div class="photo-list">
-    <div
-      :key="pic.img_src"
-      v-for="pic in photos.length > 100 ? photos.slice(0, 100) : photos"
-      class="img-container"
-    >
-      <nuxt-link :to="`/gallery/spirit/${pic.id}`"
-        ><img :src="pic.img_src" alt="Mars rover photo"
-      /></nuxt-link>
+  <div>
+    <div class="photo-list">
+      <div
+        :key="pic.img_src"
+        v-for="pic in photos.length > 100 ? photos.slice(0, 100) : photos"
+        class="img-container"
+      >
+        <nuxt-link :to="`/gallery/${pic.rover.name}/${pic.id}`"
+          ><img :src="pic.img_src" alt="Mars rover photo"
+        /></nuxt-link>
+      </div>
     </div>
   </div>
 </template>
@@ -18,11 +20,11 @@ export default {
 
   props: {
     photos: Array,
+    loading: Boolean,
   },
 
   methods: {
     limitPhotos() {
-      console.log(this.photos.length)
       if (this.photos.length > 100) {
         this.listOfPhotos = this.photos.slice(0, 100)
       }
