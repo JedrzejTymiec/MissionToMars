@@ -39,4 +39,20 @@ export class ApodService {
         const newData = new this.apodModel(data)
         await newData.save();
     }
+
+    async saveApodByDate(date): Promise<string> {
+        const data = (await this.httpService.get(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV`)
+        .toPromise()).data;
+        const dataObj = {
+            copyright: data.copyright,
+            date: data.date,
+            explanation: data.explanation,
+            media_type: data.media_type,
+            title: data.title,
+            url: data.url
+        }
+        const newData = new this.apodModel(dataObj);
+        await newData.save();
+        return `Apod ${date} saved`
+    }
 }

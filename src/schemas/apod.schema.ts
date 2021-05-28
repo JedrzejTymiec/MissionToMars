@@ -7,9 +7,7 @@ export const ApodSchema = new mongoose.Schema({
         unique: true
     },
     explanation: String,
-    hdurl: String,
     media_type: String,
-    service_version: String,
     title: String,
     url: String,
 })

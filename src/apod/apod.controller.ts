@@ -1,4 +1,8 @@
-import { Controller, Param, Get, Post } from "@nestjs/common";
+import { 
+    Controller,   
+    Param, 
+    Get, 
+    Post } from "@nestjs/common";
 import { ApodService } from "./apod.service";
 
 @Controller("apod")
@@ -18,5 +22,10 @@ export class ApodController {
     @Post()
     saveTodays(): Promise<void> {
         return this.apodService.saveTodayApod();
+    }
+
+    @Post(":date")
+    async saveByDate(@Param("date") date): Promise<string> {
+        return this.apodService.saveApodByDate(date)
     }
 }
