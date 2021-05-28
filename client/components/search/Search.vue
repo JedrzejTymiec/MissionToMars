@@ -11,7 +11,7 @@
           ? '2208'
           : rover === 'Opportunity'
           ? '5111'
-          : maxSol.toString()
+          : maxSol && maxSol.toString()
       "
     />
     <button class="btn" type="submit">Search!</button>

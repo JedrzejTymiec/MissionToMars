@@ -1,31 +1,58 @@
 <template>
   <div>
     <select v-model="camera">
-      <option v-if="cameras.find((cam) => cam === 'FHAZ')" value="FHAZ">
+      <option
+        v-if="cameras ? cameras.find((cam) => cam === 'FHAZ') : true"
+        value="FHAZ"
+      >
         Front Hazard Avoidance Camera
       </option>
-      <option v-if="cameras.find((cam) => cam === 'RHAZ')" value="RHAZ">
+      <option
+        v-if="cameras ? cameras.find((cam) => cam === 'RHAZ') : true"
+        value="RHAZ"
+      >
         Rear Hazard Avoidance Camera
       </option>
-      <option v-if="cameras.find((cam) => cam === 'NAVCAM')" value="NAVCAM">
+      <option
+        v-if="cameras ? cameras.find((cam) => cam === 'NAVCAM') : true"
+        value="NAVCAM"
+      >
         Navigation Camera
       </option>
-      <option v-if="cameras.find((cam) => cam === 'MAST')" value="MAST">
+      <option
+        v-if="cameras ? cameras.find((cam) => cam === 'MAST') : true"
+        value="MAST"
+      >
         Mast Camera
       </option>
-      <option v-if="cameras.find((cam) => cam === 'CHEMCAM')" value="CHEMCAM">
+      <option
+        v-if="cameras ? cameras.find((cam) => cam === 'CHEMCAM') : true"
+        value="CHEMCAM"
+      >
         Chemistry and Camera Complex
       </option>
-      <option v-if="cameras.find((cam) => cam === 'MAHLI')" value="MAHLI">
+      <option
+        v-if="cameras ? cameras.find((cam) => cam === 'MAHLI') : true"
+        value="MAHLI"
+      >
         Mars Hand Lens Imager
       </option>
-      <option v-if="cameras.find((cam) => cam === 'MARDI')" value="MARDI">
+      <option
+        v-if="camera ? cameras.find((cam) => cam === 'MARDI') : true"
+        value="MARDI"
+      >
         Mars Descent Imager
       </option>
-      <option v-if="cameras.find((cam) => cam === 'PANCAM')" value="PANCAM">
+      <option
+        v-if="cameras ? cameras.find((cam) => cam === 'PANCAM') : true"
+        value="PANCAM"
+      >
         Panoramic Camera
       </option>
-      <option v-if="cameras.find((cam) => cam === 'MINITES')" value="MINITES">
+      <option
+        v-if="cameras ? cameras.find((cam) => cam === 'MINITES') : true"
+        value="MINITES"
+      >
         Miniature Thermal Emission Spectrometer (Mini-TES)
       </option>
     </select>

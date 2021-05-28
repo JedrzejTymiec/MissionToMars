@@ -2,7 +2,12 @@
   <div class="body">
     <div>
       <h1>Maritian rovers photo gallery</h1>
-      <nuxt-link :to="`/gallery/${this.currentPhoto.rover.name}/`"
+      <nuxt-link
+        :to="
+          this.currentPhoto
+            ? `/gallery/${this.currentPhoto.rover.name}/`
+            : '/gallery/'
+        "
         ><button class="btn">Back to gallery</button></nuxt-link
       >
     </div>
@@ -15,7 +20,9 @@
         Next photo
       </button>
       <div class="container">
-        <div><img :src="this.currentPhoto.img_src" /></div>
+        <div>
+          <img :src="this.currentPhoto && this.currentPhoto.img_src" />
+        </div>
       </div>
       <button v-if="index > 0" @click="prevPhoto(index)" class="btn">
         Prev photo

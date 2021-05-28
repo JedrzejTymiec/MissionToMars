@@ -30,6 +30,7 @@ export default {
     prevSolNr: Function,
     maxSol: Number,
     setSol: Function,
+    setDate: Function,
     cameras: Array,
   },
   data() {
