@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <h1>Mars rovers photo gallery</h1>
+    <h1>Maritian rovers photo gallery</h1>
     <div class="container">
       <Title
         :rover="this.rover"

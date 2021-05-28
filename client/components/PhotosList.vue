@@ -5,7 +5,9 @@
       v-for="pic in photos.length > 100 ? photos.slice(0, 100) : photos"
       class="img-container"
     >
-      <img :src="pic.img_src" alt="Mars rover photo" />
+      <nuxt-link :to="`/gallery/spirit/${pic.id}`"
+        ><img :src="pic.img_src" alt="Mars rover photo"
+      /></nuxt-link>
     </div>
   </div>
 </template>
