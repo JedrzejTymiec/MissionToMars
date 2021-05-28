@@ -23,5 +23,8 @@ export const mutations = {
     setApod: (state, apod) => {
         state.apod = apod
         state.loading = false
+    },
+    apodUpdating: (state) => {
+        state.loading = true
     }
 };

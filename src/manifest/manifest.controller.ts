@@ -10,6 +10,11 @@ export class ManifestController {
         return this.manifestService.getManifest(rover);
     }
 
+    @Get()
+    getAll(): Promise<object> {
+        return this.manifestService.getAllManifests();
+    }
+
     @Post()
     saveCuriosityYesterdayData(): Promise<void> {
         return this.manifestService.saveYesterdayCuriosityData();

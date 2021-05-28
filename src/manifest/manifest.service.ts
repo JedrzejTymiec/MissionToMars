@@ -19,9 +19,15 @@ export class ManifestService {
             }))
     }
 
+    async getAllManifests(): Promise<object> {
+        return await this.manifestModel.find();
+    }
+
     async saveYesterdayCuriosityData(): Promise<void> {
         const data = (await this.httpService.get(`https://api.nasa.gov/mars-photos/api/v1/manifests/curiosity?&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV`).toPromise()).data
-        let newData = new this.manifestModel(data.photo_manifest);
+
+        const newData = new this.manifestModel(data.photo_manifest);
+
         await newData.save();
     }
 
