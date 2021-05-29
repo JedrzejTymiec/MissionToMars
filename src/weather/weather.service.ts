@@ -37,6 +37,6 @@ export class WeatherService {
     }
 
     async serveWeather(): Promise<Weather[]> {
-        return this.weatherModel.find();
+        return this.weatherModel.find().sort({terrestrial_date: -1}).limit(5);
     }
 }
