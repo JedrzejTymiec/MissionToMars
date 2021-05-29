@@ -21,12 +21,18 @@ export class ManifestService {
     }
 
     //update curiosity manifest daily
-    async saveYesterdayCuriosityData(): Promise<void> {
+    async saveYesterdayCuriosityData(): Promise<Manifest> {
         const data = (await this.httpService.get(`https://api.nasa.gov/mars-photos/api/v1/manifests/curiosity?&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV`).toPromise()).data
-
-        const newData = new this.manifestModel(data.photo_manifest);
-
-        this.manifestModel.findOneAndUpdate({ name: "Curiosity" }, newData)
+        let newData = {
+            name: data.photo_manifest.name,
+            landing_date: data.photo_manifest.landing_date,
+            launch_date: data.photo_manifest.launch_date,
+            status: data.photo_manifest.status,
+            max_sol: data.photo_manifest.max_sol,
+            max_date: data.photo_manifest.max_date,
+            total_photos: data.photo_manifest.total_photos,
+        }
+        return this.manifestModel.findOneAndUpdate({ name: "Curiosity" }, newData, { new: true })
     }
 
     //db population

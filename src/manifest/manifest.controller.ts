@@ -13,7 +13,7 @@ export class ManifestController {
 
     // Curiosity manifest update
     @Post()
-    saveCuriosityYesterdayData(): Promise<void> {
+    saveCuriosityYesterdayData(): Promise<Manifest> {
         return this.manifestService.saveYesterdayCuriosityData();
     }
     //save manifest by rover

@@ -67,9 +67,9 @@ export class PhotosController {
         return this.photosService.findAllByRover(rover);
     }
 
-    @Get("/100/:rover")
-    find100ByRover(@Param("rover") rover): Promise<Photo[]> {
-        return this.photosService.find100ByRover(rover);
+    @Get("/100/:rover/:sol")
+    find100ByRover(@Param("rover") rover, @Param("sol") sol): Promise<Photo[]> {
+        return this.photosService.find100ByRover(rover, sol);
     }
 
     @Get("/camera/:c1/:c2?/:c3?/:c4?/:c5?/:c6?/:c7?/:c8?/:c9?")

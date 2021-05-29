@@ -87,9 +87,15 @@ export class PhotosService {
         return await this.photoModel.find({ rover: rover })
     }
 
-    async find100ByRover(rover): Promise<Photo[]> {
-        return await this.photoModel.find({ rover: rover }).limit(100)
-    }
+    async find100ByRover(rover, sol): Promise<Photo[]> {
+        let photos =  await this.photoModel.find({ rover: rover, sol: sol }).limit(100)
+        if (photos.length === 0) {
+            await this.savePhotosBySol(rover, sol)
+            photos = await this.photoModel.find({ rover: rover, sol: sol }).limit(100)
+        } else {
+            return photos
+        }
+    } 
 
     async findAllAscending(): Promise<Photo[]> {
         return await this.photoModel.find().sort({ earth_date: 1 })
