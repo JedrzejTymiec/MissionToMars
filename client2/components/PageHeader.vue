@@ -26,4 +26,8 @@ export default {
 .header .btn {
   padding: 0.5rem;
 }
+
+.btn {
+  background-color: rgb(240, 240, 240);
+}
 </style>

@@ -92,6 +92,7 @@ export default {
     },
   },
   created() {
+    this.$store.commit('apod/clearApod')
     this.getToday()
     this.todayDate()
   },

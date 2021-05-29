@@ -29,5 +29,6 @@ export default {
   height: 100px;
   margin: 0 2rem;
   font-size: 1.5rem;
+  background-color: rgb(240, 240, 240);
 }
 </style>
