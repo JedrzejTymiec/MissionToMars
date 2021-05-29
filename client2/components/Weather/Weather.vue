@@ -13,7 +13,7 @@
 
 <script>
 import WeatherPanel from './WeatherPanel'
-import Spinner from './Spinner'
+import Spinner from '../layout/Spinner'
 import axios from 'axios'
 
 export default {

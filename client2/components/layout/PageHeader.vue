@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <h1 class="page-title">{{ title }}</h1>
-    <nuxt-link to="/"><button class="btn">Go back</button></nuxt-link>
+    <nuxt-link :to="backLink"><button class="btn">Go back</button></nuxt-link>
   </div>
 </template>
 
@@ -10,6 +10,7 @@ export default {
   name: 'PageHeader',
   props: {
     title: String,
+    backLink: String,
   },
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <PageHeader title="Astrological picture of the day" />
+    <PageHeader title="Astrological picture of the day" backLink="/" />
     <Spinner v-if="loading" />
     <div v-else class="container">
       <div class="title">
@@ -39,8 +39,8 @@
 
 <script>
 import axios from 'axios'
-import Spinner from '../components/Spinner'
-import PageHeader from '../components/PageHeader'
+import Spinner from '../components/layout/Spinner'
+import PageHeader from '../components/layout/PageHeader'
 
 export default {
   name: 'APOD',

@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <PageHeader title="Rovers" />
+    <PageHeader title="Rovers" backLink="/" />
     <Spinner v-if="loading" />
     <div v-else class="container">
       <Rover :key="rover._id" v-for="rover in rovers" :rover="rover" />
@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import PageHeader from '../components/PageHeader'
-import Rover from '../components/Rover'
-import Spinner from '../components/Spinner'
+import PageHeader from '../components/layout/PageHeader'
+import Rover from '../components/gallery/Rover'
+import Spinner from '../components/layout/Spinner'
 import axios from 'axios'
 
 export default {
@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   display: flex;
   justify-content: space-between;

@@ -1,5 +1,5 @@
 <template>
-  <img src="../static/spinner.gif" alt="Loading" />
+  <img src="../../static/spinner.gif" alt="Loading" />
 </template>
 
 <script>
