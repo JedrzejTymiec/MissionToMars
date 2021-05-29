@@ -27,7 +27,7 @@ export class ApodController {
     }
     //db population function
     @Post(":date")
-    saveByDate(@Param("date") date): Promise<string> {
+    saveByDate(@Param("date") date): Promise<void> {
         return this.apodService.saveApodByDate(date)
     }
 
@@ -38,6 +38,6 @@ export class ApodController {
 
     @Get("/:date")
     getApodByDate(@Param("date") date): Promise<Apod[]> {
-        return this.apodService.apodByDate(date);
+        return this.apodService.apodByDate(date)
     }
 }

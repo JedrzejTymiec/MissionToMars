@@ -44,7 +44,7 @@ export class ApodService {
     }
 
     //db population 
-    async saveApodByDate(date): Promise<string> {
+    async saveApodByDate(date): Promise<void> {
         const data = (await this.httpService.get(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=C4v75pvxgp5viFWYLoNJfX3zssTNByDByVn8LbtV`)
             .toPromise()).data;
         const dataObj = {
@@ -57,15 +57,22 @@ export class ApodService {
         }
         const newData = new this.apodModel(dataObj);
         await newData.save();
-        return `Apod ${date} saved`
     }
 
 
     async lastestApod(): Promise<Apod[]> {
-        return this.apodModel.find().sort({ date: -1 }).limit(1)
+        return await this.apodModel.find().sort({ date: -1 }).limit(1)
+
     }
 
     async apodByDate(date): Promise<Apod[]> {
-        return this.apodModel.find({ date: date })
+        const item = await this.apodModel.find({ date: date })
+        if (item.length === 0) {
+            await this.saveApodByDate(date)
+            return await this.apodModel.find({ date: date })
+        } else {
+            return item
+        }
+        
     }
 }
