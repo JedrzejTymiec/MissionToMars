@@ -63,7 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .rover {
   background-color: rgb(240, 240, 240);
   margin: 1rem;

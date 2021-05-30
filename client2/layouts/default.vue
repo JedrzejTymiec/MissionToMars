@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Weather from '../components/Weather/Weather'
+import Weather from '../components/weather/Weather'
 
 export default {
   components: {

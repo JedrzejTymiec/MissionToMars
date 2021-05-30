@@ -86,4 +86,9 @@ export class PhotosController {
     ): Promise<Photo[]> {
         return this.photosService.findAllByCam(c1, c2, c3, c4, c5, c6, c7, c8, c9)
     }
+
+    @Get("/photo/:id")
+    findById(@Param("id") id): Promise<Photo> {
+        return this.photosService.findOneById(id);
+    }
 }

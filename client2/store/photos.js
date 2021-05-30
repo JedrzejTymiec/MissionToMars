@@ -1,6 +1,8 @@
-export const store = () => ({
+export const state = () => ({
     list: [],
-    loading: true
+    photo: {},
+    loading: true,
+    photoLoad: true
 })
 
 export const mutations = {
@@ -10,7 +12,16 @@ export const mutations = {
     },
 
     clearPhotos: (state) => {
-        state.photos = [],
+        state.list = [],
         state.loading = true
+    },
+
+    getPhoto: (state, photo) => {
+        state.photo = photo,
+        state.photoLoad = false
+    },
+
+    clearPhoto: (state) => {
+        state.photo = {}
     }
 }

@@ -1,6 +1,8 @@
 <template>
   <div class="img-container">
-    <img :src="photo.img_src" alt="Mars rover photo" />
+    <nuxt-link :to="`/gallery/${photo.rover.toLowerCase()}/${photo._id}`"
+      ><img :src="photo.img_src" alt="Mars rover photo"
+    /></nuxt-link>
   </div>
 </template>
 
@@ -9,6 +11,10 @@ export default {
   name: 'Photo',
   props: {
     photo: Object,
+    date: Function,
+  },
+  created() {
+    this.date()
   },
 }
 </script>
