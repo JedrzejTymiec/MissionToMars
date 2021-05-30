@@ -1,19 +1,28 @@
 <template>
-  <div>
-    <p>XXX</p>
+  <div class="body">
     <Spinner v-if="loading" />
-    <img v-else :src="photo.img_src" />
+    <div v-else>
+      <PageHeader
+        :title="`${this.photo.rover} gallery`"
+        :backLink="`/gallery/${this.photo.rover}`"
+      />
+      <div class="photo-container">
+        <img :src="photo.img_src" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import Spinner from '../../../components/layout/Spinner'
+import PageHeader from '../../../components/layout/PageHeader'
 
 export default {
   name: 'SinglePhoto',
   components: {
     Spinner,
+    PageHeader,
   },
   computed: {
     photo() {
@@ -30,11 +39,18 @@ export default {
     },
   },
   created() {
+    this.$store.commit('photos/clearPhoto')
     this.getPhoto()
-    console.log(this.photo.img_src)
+    console.log(this.$route)
   },
 }
 </script>
 
 <style>
+.photo-container {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

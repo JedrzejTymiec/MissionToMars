@@ -109,6 +109,10 @@ export class PhotosService {
         return await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } })
     }
 
+    async findByRoverSolCam(rover, sol, c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
+        return await this.photoModel.find({ rover: rover, sol: sol, camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } })
+    }
+
     async findOneById(id): Promise<Photo> {
         return await this.photoModel.findById(id)
     }

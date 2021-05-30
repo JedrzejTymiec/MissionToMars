@@ -51,6 +51,7 @@ export default {
   },
   methods: {
     async fetchPhotos(sol) {
+      console.log(sol)
       const res = await axios.get(`/api/photos/100/${this.rover}/${sol}`)
       this.$store.commit('photos/getPhotos', res.data)
       this.sol = sol
@@ -61,8 +62,15 @@ export default {
     },
   },
   created() {
+    if (process.browser) {
+      this.sol = localStorage.getItem('sol')
+    }
     this.$store.commit('photos/clearPhotos')
-    this.fetchPhotos(this.defaultSol)
+
+    this.sol >= 1
+      ? this.fetchPhotos(this.sol)
+      : this.fetchPhotos(this.defaultSol)
+    this.sol === 0 && this.rover === 'Curiosity' && this.fetchPhotos(this.sol)
   },
 }
 </script>
