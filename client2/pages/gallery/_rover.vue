@@ -13,7 +13,7 @@
         this.$route.params.rover.slice(1)
       "
     />
-    <PhotoList
+    <RoverPhotoList
       :rover="
         this.$route.params.rover.charAt(0).toUpperCase() +
         this.$route.params.rover.slice(1)
@@ -25,14 +25,14 @@
 <script>
 import PageHeader from '../../components/layout/PageHeader'
 import Search from '../../components/gallery/Search'
-import PhotoList from '../../components/gallery/PhotoList'
+import RoverPhotoList from '../../components/gallery/RoverPhotoList'
 
 export default {
   name: 'RoverGallery',
   components: {
     PageHeader,
     Search,
-    PhotoList,
+    RoverPhotoList,
   },
 }
 </script>

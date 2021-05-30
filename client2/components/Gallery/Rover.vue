@@ -49,7 +49,7 @@
       </ul>
     </div>
     <nuxt-link :to="'/gallery/' + rover.name.toLowerCase()" class="btn"
-      >Show photos</nuxt-link
+      >Show {{ rover.name }} photos</nuxt-link
     >
   </div>
 </template>
@@ -68,6 +68,7 @@ export default {
   background-color: rgb(240, 240, 240);
   margin: 1rem;
   padding: 1rem;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

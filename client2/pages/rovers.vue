@@ -5,6 +5,9 @@
     <div v-else class="container">
       <Rover :key="rover._id" v-for="rover in rovers" :rover="rover" />
     </div>
+    <nuxt-link to="/all"
+      ><button class="btn big-btn">Show all photos</button></nuxt-link
+    >
   </div>
 </template>
 
@@ -45,5 +48,12 @@ export default {
 .container {
   display: flex;
   justify-content: space-between;
+}
+
+.big-btn {
+  width: 100%;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0.5rem;
 }
 </style>

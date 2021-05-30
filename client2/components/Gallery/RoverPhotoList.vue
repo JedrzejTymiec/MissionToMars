@@ -2,13 +2,13 @@
   <div>
     <Spinner v-if="loading" />
     <div v-else class="gallery-container">
-      <div class="gallery-header">
+      <div v-if="this.photos.length > 0" class="gallery-header">
         <h2>
           Sol: {{ this.sol }}
           <span v-if="!loading">- earth date: {{ date }}</span>
         </h2>
       </div>
-      <div class="photos-container">
+      <div v-if="this.photos.length > 0" class="photos-container">
         <Photo
           :key="pic._id"
           v-for="pic in photos"
@@ -16,6 +16,7 @@
           :date="getEarthDate"
         />
       </div>
+      <div v-else class="no-photos"><h1>No photos taken this sol</h1></div>
     </div>
   </div>
 </template>
@@ -79,5 +80,12 @@ export default {
 .photos-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.no-photos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
 }
 </style>

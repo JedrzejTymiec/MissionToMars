@@ -75,16 +75,14 @@ export class PhotosService {
         })
     }
 
-    async findfirst100(): Promise<Photo[]> {
-        return await this.photoModel.find().limit(100);
+    async findPageDescending(page): Promise<Photo[]> {
+        return await this.photoModel.find().skip(page*1000).limit(100).sort({ earth_date: -1 })
+
     }
 
-    async findAll(): Promise<Photo[]> {
-        return await this.photoModel.find();
-    }
+    async findPageAscending(page): Promise<Photo[]> {
+        return await this.photoModel.find().skip(page*1000).limit(100).sort({ earth_date: 1 })
 
-    async findAllByRover(rover): Promise<Photo[]> {
-        return await this.photoModel.find({ rover: rover })
     }
 
     async find100ByRover(rover, sol): Promise<Photo[]> {
@@ -97,17 +95,9 @@ export class PhotosService {
         }
     }
 
-    async findAllAscending(): Promise<Photo[]> {
-        return await this.photoModel.find().sort({ earth_date: 1 })
-    }
-
-    async findAllDescending(): Promise<Photo[]> {
-        return await this.photoModel.find().sort({ earth_date: -1 })
-    }
-
-    async findAllByCam(c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
-        return await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } })
-    }
+    // async findAllByCam(c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
+    //     return await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } })
+    // }
 
     async findByRoverSolCam(rover, sol, c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
         return await this.photoModel.find({ rover: rover, sol: sol, camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } })
