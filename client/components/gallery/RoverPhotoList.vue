@@ -52,7 +52,6 @@ export default {
   },
   methods: {
     async fetchPhotos(sol) {
-      console.log(sol)
       const res = await axios.get(`/api/photos/100/${this.rover}/${sol}`)
       this.$store.commit('photos/getPhotos', res.data)
       this.sol = sol

@@ -135,9 +135,6 @@ export default {
       localStorage.setItem('sol', sol)
     },
   },
-  created() {
-    console.log(this.$route)
-  },
 }
 </script>
 
