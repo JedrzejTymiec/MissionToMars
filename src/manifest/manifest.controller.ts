@@ -18,7 +18,7 @@ export class ManifestController {
     }
     //save manifest by rover
     @Post("/:rover")
-    saveManifestData(@Param("rover") rover): Promise<string> {
+    saveManifestData(@Param("rover") rover: string): Promise<string> {
         return this.manifestService.saveManifestData(rover);
     }
     //serve all manifests
@@ -28,7 +28,7 @@ export class ManifestController {
     }
 
     @Get("/:rover")
-    getByRover(@Param("rover") rover): Promise<Manifest[]> {
+    getByRover(@Param("rover") rover: string): Promise<Manifest[]> {
         return this.manifestService.getByRover(rover);
     }
 }

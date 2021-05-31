@@ -1,4 +1,4 @@
-import { Injectable, HttpService } from '@nestjs/common';
+import { Injectable, HttpService, BadRequestException } from '@nestjs/common';
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Photo } from "../interfaces/photo.interface";
@@ -94,7 +94,11 @@ export class PhotosService {
     }
 
     async findPageByCamAsc(page, c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
-        return await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } }).skip(page * 100).limit(100).sort({ earth_date: 1 })
+        const data = await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } }).skip(page * 100).limit(100).sort({ earth_date: 1 })
+        if (data.length === 0) {
+            throw new BadRequestException("Invali camera, photos not found")
+        }
+        return data
     }
 
     async findPageByCamDsc(page, c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {

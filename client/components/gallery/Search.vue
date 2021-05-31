@@ -107,8 +107,15 @@ export default {
       this.$store.commit('photos/getPhotos', res.data)
     },
     async getAllByCam(cam) {
-      const res = await axios.get(`/api/photos/camera/a/1/${cam}`)
-      this.$store.commit('photos/getPhotos', res.data)
+      try {
+        const res = await axios.get(`/api/photos/camera/a/1/${cam}`)
+        this.$store.commit('photos/getPhotos', res.data)
+      } catch (err) {
+        this.$store.commit('photos/errorPhoto', err.response.data.message)
+        this.alert = true
+        this.errorMsg = err.response.data.message
+        setTimeout(() => (this.alert = false), 2000)
+      }
     },
     nextSol() {
       let sol =

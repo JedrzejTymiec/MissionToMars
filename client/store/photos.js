@@ -2,7 +2,8 @@ export const state = () => ({
     list: [],
     photo: {},
     loading: true,
-    photoLoad: true
+    photoLoad: true,
+    errorMsg: ""
 })
 
 export const mutations = {
@@ -23,5 +24,10 @@ export const mutations = {
 
     clearPhoto: (state) => {
         state.photo = {}
+    },
+
+    errorPhoto: (state, error) => {
+        state.error = error,
+        state.loading = false
     }
 }
