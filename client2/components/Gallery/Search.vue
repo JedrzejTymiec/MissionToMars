@@ -2,7 +2,7 @@
   <div class="search-bar">
     <form @submit="onSubmit($event)" class="form">
       <input
-        v-if="this.$route.name !== 'all'"
+        v-if="this.$route.name !== 'gallery-all'"
         class="input"
         v-model="sol"
         type="number"
@@ -18,14 +18,16 @@
           placeholder="Cameras by comma"
         />
         <small
-          :class="this.$route.name === 'all' ? 'all warn' : 'rover warn'"
+          :class="
+            this.$route.name === 'gallery-all' ? 'all warn' : 'rover warn'
+          "
           v-if="alert"
           >{{ errorMsg }}
         </small>
       </div>
       <button class="btn">Search!</button>
     </form>
-    <div v-if="this.$route.name !== 'all'" class="nav-buttons">
+    <div v-if="this.$route.name !== 'gallery-all'" class="nav-buttons">
       <button @click="nextSol" class="btn">Next sol</button>
       <button @click="prevSol" class="btn">Previous sol</button>
     </div>
@@ -53,7 +55,7 @@ export default {
   methods: {
     onSubmit(e) {
       e.preventDefault()
-      if (this.$route.name !== 'all') {
+      if (this.$route.name !== 'gallery-all') {
         if (this.sol !== null || this.camera.length > 0) {
           const sol = this.sol
             ? this.sol
@@ -80,9 +82,15 @@ export default {
           setTimeout(() => (this.alert = false), 2000)
         }
       } else {
-        if (this.camera.length === 0) {
+        if (this.camera.length > 0) {
+          let arr = this.camera.split(',')
+          let cameraArr = arr.map((cam) => cam.trim().toUpperCase())
+          let queryString = cameraArr.join('/')
+          this.$store.commit('photos/clearPhotos')
+          this.getAllByCam(queryString)
+        } else {
           this.alert = true
-          this.errorMsg = 'Please type cameras you wanna by!'
+          this.errorMsg = 'Please type cameras you wanna filter by!'
           setTimeout(() => (this.alert = false), 2000)
         }
       }
@@ -99,7 +107,7 @@ export default {
       this.$store.commit('photos/getPhotos', res.data)
     },
     async getAllByCam(cam) {
-      const res = await axios.get(`/api/photos/camera/${cam}`)
+      const res = await axios.get(`/api/photos/camera/a/1/${cam}`)
       this.$store.commit('photos/getPhotos', res.data)
     },
     nextSol() {
@@ -126,6 +134,9 @@ export default {
       this.getPhotosBySol(sol)
       localStorage.setItem('sol', sol)
     },
+  },
+  created() {
+    console.log(this.$route)
   },
 }
 </script>
@@ -158,6 +169,7 @@ export default {
 
 .nav-buttons {
   display: flex;
+  flex-direction: row-reverse;
   padding: 0.5rem;
 }
 

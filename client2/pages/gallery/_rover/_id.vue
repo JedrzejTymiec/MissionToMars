@@ -19,7 +19,7 @@ import Spinner from '../../../components/layout/Spinner'
 import PageHeader from '../../../components/layout/PageHeader'
 
 export default {
-  name: 'SinglePhoto',
+  name: 'RoverSinglePhoto',
   components: {
     Spinner,
     PageHeader,
@@ -41,7 +41,6 @@ export default {
   created() {
     this.$store.commit('photos/clearPhoto')
     this.getPhoto()
-    console.log(this.$route)
   },
 }
 </script>
@@ -52,5 +51,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+img {
+  max-width: 70vw;
 }
 </style>

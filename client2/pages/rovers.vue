@@ -5,7 +5,7 @@
     <div v-else class="container">
       <Rover :key="rover._id" v-for="rover in rovers" :rover="rover" />
     </div>
-    <nuxt-link to="/all"
+    <nuxt-link to="/gallery/all"
       ><button class="btn big-btn">Show all photos</button></nuxt-link
     >
   </div>

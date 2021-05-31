@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import PageHeader from '../../components/layout/PageHeader'
-import Search from '../../components/gallery/Search'
-import RoverPhotoList from '../../components/gallery/RoverPhotoList'
+import PageHeader from '../../../components/layout/PageHeader'
+import Search from '../../../components/gallery/Search'
+import RoverPhotoList from '../../../components/gallery/RoverPhotoList'
 
 export default {
   name: 'RoverGallery',

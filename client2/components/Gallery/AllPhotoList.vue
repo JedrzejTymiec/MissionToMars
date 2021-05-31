@@ -13,10 +13,13 @@ export default {
   components: {
     Photo,
   },
-  data() {
-    return {
-      currentPage: 1,
-    }
+  props: {
+    currentPage: String,
+  },
+  watch: {
+    currentPage: function (newProp) {
+      this.getPhotosPage(newProp)
+    },
   },
   computed: {
     photos() {
@@ -33,7 +36,7 @@ export default {
     },
   },
   created() {
-    this.getPhotosPage(1)
+    this.getPhotosPage(this.currentPage)
   },
 }
 </script>

@@ -1,6 +1,4 @@
 import { Injectable, HttpService } from '@nestjs/common';
-import { map } from "rxjs/operators";
-import { AxiosResponse } from "axios";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Photo } from "../interfaces/photo.interface";
@@ -76,12 +74,12 @@ export class PhotosService {
     }
 
     async findPageDescending(page): Promise<Photo[]> {
-        return await this.photoModel.find().skip(page*1000).limit(100).sort({ earth_date: -1 })
+        return await this.photoModel.find().skip(page * 1000).limit(100).sort({ earth_date: -1 })
 
     }
 
     async findPageAscending(page): Promise<Photo[]> {
-        return await this.photoModel.find().skip(page*1000).limit(100).sort({ earth_date: 1 })
+        return await this.photoModel.find().skip(page * 1000).limit(100).sort({ earth_date: 1 })
 
     }
 
@@ -95,12 +93,16 @@ export class PhotosService {
         }
     }
 
-    // async findAllByCam(c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
-    //     return await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } })
-    // }
+    async findPageByCamAsc(page, c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
+        return await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } }).skip(page * 100).limit(100).sort({ earth_date: 1 })
+    }
+
+    async findPageByCamDsc(page, c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
+        return await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } }).skip(page * 100).limit(100).sort({ earth_date: -1 })
+    }
 
     async findByRoverSolCam(rover, sol, c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
-        return await this.photoModel.find({ rover: rover, sol: sol, camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } })
+        return await this.photoModel.find({ rover: rover, sol: sol, camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } }).limit(100)
     }
 
     async findOneById(id): Promise<Photo> {
