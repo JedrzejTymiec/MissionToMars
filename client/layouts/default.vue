@@ -1,27 +1,16 @@
 <template>
   <div class="app">
-    <Navbar />
+    <Weather />
     <Nuxt />
   </div>
 </template>
 
 <script>
-import Navbar from "../components/sidebar/Navbar"
-import { mapActions } from "vuex"
+import Weather from '../components/weather/Weather'
 
 export default {
   components: {
-    Navbar,
-  },
-
-  methods: {
-    ...mapActions({
-      getManifests: "manifest/getManifests",
-    }),
-  },
-
-  created() {
-    this.getManifests()
+    Weather,
   },
 }
 </script>
@@ -30,6 +19,7 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -44,7 +34,6 @@ a {
 
 h1 {
   font-size: 3rem;
-  margin-bottom: 2rem;
 }
 
 .body {
@@ -56,10 +45,11 @@ h1 {
   display: flex;
   position: relative;
   width: 100vw;
+  background-color: #e0e0e0;
 }
 
 .btn {
-  background-color: rgb(216, 216, 216);
+  background-color: rgb(240, 240, 240);
   padding: 1rem;
   margin: 0.5rem;
   cursor: pointer;

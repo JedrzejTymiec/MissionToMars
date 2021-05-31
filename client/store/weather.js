@@ -1,21 +1,11 @@
-import axios from 'axios'
-
 export const state = () => ({
-    weathers: [],
+    list: [],
     loading: true
 });
 
-export const actions = {
-    async getWeather({ commit }) {
-        const res = await axios.get("/api/weather");
-
-        commit("setWeather", res.data)
-    }
-};
-
 export const mutations = {
     setWeather: (state, weathers) => {
-        state.weathers = weathers
+        state.list = weathers
         state.loading = false
     }
-};
+}

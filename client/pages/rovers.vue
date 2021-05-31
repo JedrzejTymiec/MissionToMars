@@ -1,56 +1,59 @@
 <template>
   <div class="body">
-    <h1>Mars rovers photo gallery</h1>
-    <div class="rovers-container">
-      <Spinner v-if="loading" />
-      <RoverDescription
-        v-else
-        :key="rover.name"
-        v-for="rover in manifests"
-        :rover="rover"
-      />
+    <PageHeader title="Rovers" backLink="/" />
+    <Spinner v-if="loading" />
+    <div v-else class="container">
+      <Rover :key="rover._id" v-for="rover in rovers" :rover="rover" />
     </div>
+    <nuxt-link to="/gallery/all"
+      ><button class="btn big-btn">Show all photos</button></nuxt-link
+    >
   </div>
 </template>
 
 <script>
-import RoverDescription from "../components/RoverDescription"
-import { mapActions } from "vuex"
-import Spinner from "../components/Spinner"
+import PageHeader from '../components/layout/PageHeader'
+import Rover from '../components/gallery/Rover'
+import Spinner from '../components/layout/Spinner'
+import axios from 'axios'
 
 export default {
+  name: 'Rovers',
   components: {
-    RoverDescription,
+    PageHeader,
+    Rover,
     Spinner,
   },
-
   computed: {
+    rovers() {
+      return this.$store.state.rovers.list
+    },
     loading() {
-      return this.$store.state.manifest.loading
-    },
-    manifests() {
-      return this.$store.state.manifest.manifests
-    },
-    called() {
-      return this.$store.state.manifest.called
+      return this.$store.state.rovers.loading
     },
   },
-
   methods: {
-    ...mapActions({
-      getManifests: "manifest/getManifests",
-    }),
+    async getRovers() {
+      const res = await axios.get(`/api/manifest`)
+      this.$store.commit('rovers/getRovers', res.data)
+    },
   },
-
   created() {
-    !this.called && this.getManifests()
+    this.getRovers()
   },
 }
 </script>
 
-<style>
-.rovers-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+<style scoped>
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.big-btn {
+  width: 100%;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0.5rem;
 }
 </style>
