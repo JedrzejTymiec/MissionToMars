@@ -96,17 +96,33 @@ export class PhotosService {
     async findPageByCamAsc(page, c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
         const data = await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } }).skip(page * 100).limit(100).sort({ earth_date: 1 })
         if (data.length === 0) {
-            throw new BadRequestException("Invali camera, photos not found")
+            throw new BadRequestException("Invalid camera, photos not found")
         }
         return data
     }
 
     async findPageByCamDsc(page, c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
-        return await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } }).skip(page * 100).limit(100).sort({ earth_date: -1 })
+        const data = await this.photoModel.find({ camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } }).skip(page * 100).limit(100).sort({ earth_date: -1 })
+        if (data.length === 0) {
+            throw new BadRequestException("Invalid camera, photos not found")
+        }
+        return data
     }
 
     async findByRoverSolCam(rover, sol, c1, c2?, c3?, c4?, c5?, c6?, c7?, c8?, c9?): Promise<Photo[]> {
-        return await this.photoModel.find({ rover: rover, sol: sol, camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } }).limit(100)
+        const res = await this.photoModel.find({ rover: rover, sol: sol, camera: { $in: [c1, c2, c3, c4, c5, c6, c7, c8, c9] } }).limit(100)
+        if (res.length === 0) {
+            if (sol >= 0 && sol <= 5111) {
+                if (rover === "Spirit" || rover === "Opportunity" || rover === "Curiosity") {
+                    throw new BadRequestException("Invalid camera")
+                } else {
+                    throw new BadRequestException("Invalid rover name")
+                }
+            } else {
+                throw new BadRequestException("Invalid sol number")
+            }
+        }
+        return res
     }
 
     async findOneById(id): Promise<Photo> {

@@ -9,9 +9,9 @@
 
 <script>
 import PageHeader from '../../../components/layout/PageHeader'
-import Search from '../../../components/gallery/Search'
+import Search from '../../../components/navigation/Search'
 import AllPhotoList from '../../../components/gallery/AllPhotoList'
-import PagesBar from '../../../components/gallery/PagesBar'
+import PagesBar from '../../../components/navigation/PagesBar'
 
 export default {
   name: 'AllPhotos',

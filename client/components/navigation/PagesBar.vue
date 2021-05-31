@@ -1,6 +1,7 @@
 <template>
   <div class="pages-container">
-    <div class="sort-container">
+    <p>Sort by date</p>
+    <div class="icons-container">
       <font-awesome-icon
         @click="sort(true)"
         class="sort-icon"
@@ -39,14 +40,18 @@ export default {
   },
   methods: {
     async sort(order) {
-      this.$store.commit('photos/clearPhotos')
-      let res
-      if (order) {
-        res = await axios.get('/api/photos/page/1')
-      } else {
-        res = await axios.get('/api/photos/page/a/1')
+      try {
+        this.$store.commit('photos/clearPhotos')
+        let res
+        if (order) {
+          res = await axios.get('/api/photos/page/1')
+        } else {
+          res = await axios.get('/api/photos/page/a/1')
+        }
+        this.$store.commit('photos/getPhotos', res.data)
+      } catch (err) {
+        this.$store.commit('photos/errorPhoto', err.response.data.message)
       }
-      this.$store.commit('photos/getPhotos', res.data)
     },
   },
 }
@@ -55,6 +60,13 @@ export default {
 <style>
 .pages-container {
   position: relative;
+}
+
+.pages-container p {
+  letter-spacing: 2px;
+  position: absolute;
+  left: -10px;
+  top: -10px;
 }
 
 .pages {
@@ -72,7 +84,7 @@ export default {
   margin-bottom: 0.5rem;
 }
 
-.sort-container {
+.icons-container {
   position: absolute;
   left: 0;
   bottom: 10px;

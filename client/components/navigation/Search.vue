@@ -76,10 +76,7 @@ export default {
           localStorage.setItem('sol', sol)
           this.sol = null
         } else {
-          this.alert = true
-          this.errorMsg = 'Type sol or camera you wanna search for!'
-
-          setTimeout(() => (this.alert = false), 2000)
+          this.setAlert('Type sol or camera you wanna search for!')
         }
       } else {
         if (this.camera.length > 0) {
@@ -89,9 +86,7 @@ export default {
           this.$store.commit('photos/clearPhotos')
           this.getAllByCam(queryString)
         } else {
-          this.alert = true
-          this.errorMsg = 'Please type cameras you wanna filter by!'
-          setTimeout(() => (this.alert = false), 2000)
+          this.setAlert('Please type cameras you wanna filter by!')
         }
       }
     },
@@ -101,10 +96,15 @@ export default {
       this.$store.commit('photos/getPhotos', res.data)
     },
     async filterByCam(sol, cam) {
-      const res = await axios.get(
-        `/api/photos/100/camera/${this.rover}/${sol}/${cam}`
-      )
-      this.$store.commit('photos/getPhotos', res.data)
+      try {
+        const res = await axios.get(
+          `/api/photos/100/camera/${this.rover}/${sol}/${cam}`
+        )
+        this.$store.commit('photos/getPhotos', res.data)
+      } catch (err) {
+        this.$store.commit('photos/errorPhoto', err.response.data.message)
+        this.setAlert(err.response.data.message)
+      }
     },
     async getAllByCam(cam) {
       try {
@@ -112,9 +112,7 @@ export default {
         this.$store.commit('photos/getPhotos', res.data)
       } catch (err) {
         this.$store.commit('photos/errorPhoto', err.response.data.message)
-        this.alert = true
-        this.errorMsg = err.response.data.message
-        setTimeout(() => (this.alert = false), 2000)
+        this.setAlert(err.response.data.message)
       }
     },
     nextSol() {
@@ -140,6 +138,11 @@ export default {
       this.$store.commit('photos/clearPhotos')
       this.getPhotosBySol(sol)
       localStorage.setItem('sol', sol)
+    },
+    setAlert(msg) {
+      this.alert = true
+      this.errorMsg = msg
+      setTimeout(() => (this.alert = false), 2000)
     },
   },
 }

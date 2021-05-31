@@ -13,7 +13,7 @@
 
 <script>
 import PageHeader from '../components/layout/PageHeader'
-import Rover from '../components/gallery/Rover'
+import Rover from '../components/layout/Rover'
 import Spinner from '../components/layout/Spinner'
 import axios from 'axios'
 

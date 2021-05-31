@@ -24,7 +24,7 @@
 
 <script>
 import PageHeader from '../../../components/layout/PageHeader'
-import Search from '../../../components/gallery/Search'
+import Search from '../../../components/navigation/Search'
 import RoverPhotoList from '../../../components/gallery/RoverPhotoList'
 
 export default {

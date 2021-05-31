@@ -8,7 +8,7 @@
           <span v-if="!loading">- earth date: {{ date }}</span>
         </h2>
       </div>
-      <div v-if="this.photos.length > 0" class="photos-container">
+      <div v-if="photos.length > 0" class="photos-container">
         <Photo
           :key="pic._id"
           v-for="pic in photos"
@@ -16,7 +16,7 @@
           :date="getEarthDate"
         />
       </div>
-      <div v-else class="no-photos"><h1>No photos taken this sol</h1></div>
+      <div v-else class="no-photos"><h1>No photos fouond</h1></div>
     </div>
   </div>
 </template>
